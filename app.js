@@ -6,8 +6,9 @@ const Onboarding = require('./onboarding');
 const app = require('./config');
 
 const PORT = app.get('port');
+const HOST = '0.0.0.0'
 
-app.listen(PORT, () => {
+app.listen(PORT, HOST, () => {
   Onboarding.trigger();
   process.stdout.write(`Point your browser to: http://localhost:${PORT}\n`);
 });
