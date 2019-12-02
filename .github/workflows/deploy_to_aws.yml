@@ -51,9 +51,16 @@ jobs:
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
 
-    - name: Build jar with Maven
-      run: 
-        mvn -B package -DskipTests --file pom.xml 
+    - name: Setup Node
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 10
+    - name: npm install, build and test
+      run: |
+        npm install 
+        npm run build --if-present
+        npm test
+    
     - name: Build, tag, and push image to Amazon ECR
       id: build-image
       env:
